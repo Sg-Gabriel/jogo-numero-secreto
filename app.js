@@ -1,7 +1,10 @@
 let listaNumSorteado = [];
-let limiteTentativa = 100;
+let numeroLimite = 100;
 let numSecreto = gerarNum();
 let tentativas = 1;
+let teclaEnter = 1
+
+console.log(numSecreto);
 
 mensagemInicial()
 
@@ -11,10 +14,16 @@ function exibirTextoNaTela(tag, texto) {
     responsiveVoice.speak(texto, "Brazilian Portuguese Female", { rate: 1.2 });
 }
 function mensagemInicial() {
-    exibirTextoNaTela("h1", "Jogo do número secreto");
-    exibirTextoNaTela("p", "Escolha um número entre 1 e " + limiteTentativa);
+    exibirTextoNaTela("h1", "Descubra o número que pensei");
+    exibirTextoNaTela("p", "Escolha um número entre 1 e " + numeroLimite);
 
 }
+document.addEventListener("keypress", function(e) {
+    
+    if(e.key === "Enter" && teclaEnter == 1) {
+         return verificarChute();
+    }
+})
 
 function verificarChute() {
     let chute = document.querySelector("input").value;
@@ -27,18 +36,19 @@ function verificarChute() {
         exibirTextoNaTela("p", mensagemTentativas);
         document.getElementById("chute").setAttribute("disabled", true)
         document.getElementById("reiniciar").removeAttribute("disabled");
+        teclaEnter++
     }
     else {
-        if (chute > numSecreto && chute <= limiteTentativa) {
+        if (chute > numSecreto && chute <= numeroLimite) {
             exibirTextoNaTela("h1", `O número é menor do que ${chute}`);
         }
         else {
             if (chute < numSecreto && chute != "" && chute > 0) {
                 exibirTextoNaTela("h1", `O número é maior do que ${chute}`);
             } else {
-                if (chute > limiteTentativa) {
+                if (chute > numeroLimite) {
                     exibirTextoNaTela("h1", "número inválido");
-                    exibirTextoNaTela("p", "Escolha um número entre 1 e " + limiteTentativa);
+                    exibirTextoNaTela("p", "Escolha um número entre 1 e " + numeroLimite);
                 } else {
                     exibirTextoNaTela("h1", "Digite um número para jogar");
                     tentativas = 0;
@@ -53,10 +63,10 @@ function verificarChute() {
 }
 
 function gerarNum() {
-    let numEscolhidoAleatorio = parseInt(Math.random() * limiteTentativa + 1);
+    let numEscolhidoAleatorio = parseInt(Math.random() * numeroLimite + 1);
     let quantDeElementNaLista = listaNumSorteado.length;
 
-    if (quantDeElementNaLista == limiteTentativa) {
+    if (quantDeElementNaLista == numeroLimite) {
         listaNumSorteado = [];
     }
 
@@ -80,5 +90,5 @@ function reiniciarJogo() {
     verificarChute();
     document.getElementById("reiniciar").setAttribute("disabled", true);
     document.getElementById("chute").removeAttribute("disabled");
-
+    teclaEnter = 1
 }
