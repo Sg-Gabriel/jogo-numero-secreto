@@ -2,11 +2,11 @@ let listaNumSorteado = [];
 let numeroLimite = 100;
 let numSecreto = gerarNum();
 let tentativas = 1;
-let teclaEnter = 1
+let teclaEnter = true;
 
 console.log(numSecreto);
 
-mensagemInicial()
+mensagemInicial();
 
 function exibirTextoNaTela(tag, texto) {
     let campo = document.querySelector(tag);
@@ -20,7 +20,7 @@ function mensagemInicial() {
 }
 document.addEventListener("keypress", function(e) {
     
-    if(e.key === "Enter" && teclaEnter == 1) {
+    if(e.key === "Enter" && teclaEnter == true) {
          return verificarChute();
     }
 })
@@ -34,9 +34,9 @@ function verificarChute() {
         let mensagemTentativas = `Parabéns! Você descobriu o número secreto com ${tentativas} ${palavratentativa}`;
         exibirTextoNaTela("h1", "Você acertou!");
         exibirTextoNaTela("p", mensagemTentativas);
-        document.getElementById("chute").setAttribute("disabled", true)
+        document.getElementById("chute").setAttribute("disabled", true);
         document.getElementById("reiniciar").removeAttribute("disabled");
-        teclaEnter++
+        teclaEnter = false;
     }
     else {
         if (chute > numSecreto && chute <= numeroLimite) {
@@ -90,5 +90,5 @@ function reiniciarJogo() {
     verificarChute();
     document.getElementById("reiniciar").setAttribute("disabled", true);
     document.getElementById("chute").removeAttribute("disabled");
-    teclaEnter = 1
+    teclaEnter = true;
 }
