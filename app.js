@@ -14,8 +14,7 @@ function exibirTextoNaTela(tag, texto) {
     responsiveVoice.speak(texto, "Brazilian Portuguese Female", { rate: 1.2 });
 }
 function mensagemInicial() {
-    exibirTextoNaTela("h1", "Descubra o número que pensei");
-    exibirTextoNaTela("p", "Escolha um número entre 1 e " + numeroLimite);
+    exibirTextoNaTela("p", `Escolha um número entre 1 e ${numeroLimite}`);
 
 }
 document.addEventListener("keypress", function(e) {
