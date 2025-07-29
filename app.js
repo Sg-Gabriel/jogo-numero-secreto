@@ -15,7 +15,6 @@ function exibirTextoNaTela(tag, texto) {
 }
 function mensagemInicial() {
     exibirTextoNaTela("p", `Escolha um número entre 1 e ${numeroLimite}`);
-
 }
 document.addEventListener("keypress", function(e) {
     
