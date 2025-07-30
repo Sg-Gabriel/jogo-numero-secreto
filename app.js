@@ -19,7 +19,7 @@ function mensagemInicial() {
 document.addEventListener("keypress", function(e) {
     
     if(e.key === "Enter" && teclaEnter == true) {
-         return verificarChute();
+         return verificarChute();   
     }
 })
 
